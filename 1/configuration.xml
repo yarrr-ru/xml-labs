@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration type="Production" label="Production System" marketId="MOEX">
+	<Description>
+		<![CDATA[
+			FAST templates for MOEX market.
+		]]>
+	</Description>
+
+	<ConfigTemplates>
+		<connection>
+			<type>Incremental</type>
+			<!-- Traffic shaping is disabled -->
+			<maxKbps>0</maxKbps>
+		</connection>
+		<connection>
+			<type>Snapshot</type>
+			<maxKbps>16</maxKbps>
+		</connection>
+	</ConfigTemplates>
+
+	<MarketDataGroup feedType="FUT-BOOK-1" marketID="F" marketDepth="1" label="Top of book for Futures">
+		<connections>
+			<connection>
+				<type>Incremental</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.253.232</src-ip>
+				<ip>239.195.5.1</ip>
+				<port>36001</port>
+				<feed>A</feed>
+			</connection>
+			<connection>
+				<type>Incremental</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.255.232</src-ip>
+				<ip>239.195.133.1</ip>
+				<port>37001</port>
+				<feed>B</feed>
+			</connection>
+			<connection>
+				<type>Snapshot</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.253.232</src-ip>
+				<ip>239.195.5.2</ip>
+				<port>36002</port>
+				<feed>A</feed>
+			</connection>
+			<connection>
+				<type>Snapshot</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.255.232</src-ip>
+				<ip>239.195.133.2</ip>
+				<port>37002</port>
+				<feed>B</feed>
+			</connection>
+		</connections>
+	</MarketDataGroup>
+	
+	<MarketDataGroup feedType="INDEX" marketID="I" label="Indexes">
+		<connections>
+			<connection>
+				<type>Incremental</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.253.232</src-ip>
+				<ip>239.195.5.13</ip>
+				<port>36013</port>
+				<feed>A</feed>
+			</connection>
+			<connection>
+				<type>Incremental</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.255.232</src-ip>
+				<ip>239.195.133.13</ip>
+				<port>37013</port>
+				<feed>B</feed>
+			</connection>
+			<connection>
+				<type>Snapshot</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.253.232</src-ip>
+				<ip>239.195.5.14</ip>
+				<port>36014</port>
+				<maxKbps>8</maxKbps>
+				<feed>A</feed>
+			</connection>
+			<connection>
+				<type>Snapshot</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.255.232</src-ip>
+				<ip>239.195.133.14</ip>
+				<port>37014</port>
+				<maxKbps>8</maxKbps>
+				<feed>B</feed>
+			</connection>
+			<connection>
+				<type>Historical Replay</type>
+				<protocol>TCP/IP</protocol>
+				<ip>91.203.253.232</ip>
+				<port>7005</port>
+			</connection>
+		</connections>
+	</MarketDataGroup>
+
+	<MarketDataGroup feedType="NEWS" marketID="N" label="News feed">
+		<connections>
+			<connection>
+				<type>Incremental</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.253.232</src-ip>
+				<ip>239.195.5.15</ip>
+				<port>36015</port>
+				<maxKbps>800</maxKbps>
+				<feed>A</feed>
+			</connection>
+			<connection>
+				<type>Incremental</type>
+				<protocol>UDP/IP</protocol>
+				<src-ip>91.203.255.232</src-ip>
+				<ip>239.195.133.15</ip>
+				<port>37015</port>
+				<maxKbps>800</maxKbps>
+				<feed>B</feed>
+			</connection>
+			<connection>
+				<type>Historical Replay</type>
+				<protocol>TCP/IP</protocol>
+				<ip>91.203.253.232</ip>
+				<port>7006</port>
+			</connection>
+		</connections>
+	</MarketDataGroup>
+</configuration>
