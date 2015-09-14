@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ip_type">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([0-9]*\.){3}[0-9]*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="connection_type">
+    <xs:sequence>
+      <xs:element name="type" type="xs:string" />
+      <xs:element name="protocol" type="xs:string" />
+      <xs:element name="src-ip" type="ip_type" minOccurs="0" maxOccurs="1" />
+      <xs:element name="ip" type="ip_type" />
+      <xs:element name="port" type="xs:integer" />
+      <xs:element name="maxKbps" type="xs:integer" minOccurs="0" maxOccurs="1" />
+      <xs:element name="feed" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="connections_type">
+    <xs:sequence>
+      <xs:element name="connection" type="connection_type" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MarketDataGroup_type">
+    <xs:sequence>
+      <xs:element name="connections" type="connections_type" />
+    </xs:sequence>
+    <xs:attribute name="feedType" type="xs:string" />
+    <xs:attribute name="marketID" type="xs:string" />
+    <xs:attribute name="marketDepth" type="xs:integer" />
+    <xs:attribute name="label" type="xs:string" /> 
+  </xs:complexType>
+
+  <xs:complexType name="configuration_type">
+    <xs:sequence>
+      <xs:element name="Description" />
+      <xs:element name="ConfigTemplates" />
+      <xs:element name="MarketDataGroup" type="MarketDataGroup_type" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" />
+    <xs:attribute name="label" type="xs:string" />
+    <xs:attribute name="marketId" type="xs:string" /> 
+  </xs:complexType>
+
+  <xs:element name="configuration" type="configuration_type" />
+</xs:schema>
